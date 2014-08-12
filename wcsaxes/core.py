@@ -68,6 +68,7 @@ class WCSAxes(Axes):
 
         if slices is None:
             slices = ('x', 'y')
+        self.slices = slices
 
         # Common default settings for Rectangular Frame
         if self.frame_class is RectangularFrame:
@@ -123,16 +124,16 @@ class WCSAxes(Axes):
         self.coords.frame.draw(renderer)
 
     def set_xlabel(self, label):
-        self.coords[0].set_axislabel(label)
+        self.coords[self.slices.index('x')].set_axislabel(label)
 
     def set_ylabel(self, label):
-        self.coords[1].set_axislabel(label)
+        self.coords[self.slices.index('y')].set_axislabel(label)
 
     def get_xlabel(self):
-        return self.coords[0].get_axislabel()
+        return self.coords[self.slices.index('x')].get_axislabel()
 
     def get_ylabel(self):
-        return self.coords[1].get_axislabel()
+        return self.coords[self.slices.index('y')].get_axislabel()
 
     def get_coords_overlay(self, frame, equinox=None, obstime=None, coord_meta=None):
 
